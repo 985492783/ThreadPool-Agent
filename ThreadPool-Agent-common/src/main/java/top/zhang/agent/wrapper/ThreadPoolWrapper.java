@@ -23,6 +23,7 @@ public abstract class ThreadPoolWrapper {
     public abstract boolean isRunning();
 
     protected abstract void down();
+    
 
     public abstract int getHashCode();
 
