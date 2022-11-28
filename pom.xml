@@ -13,6 +13,8 @@
         <module>ThreadPool-Agent-Simple</module>
         <module>ThreadPool-Agent-Demo</module>
         <module>ThreadPool-Agent-BootStrap</module>
+        <module>ThreadPool-Agent-console</module>
+        <module>ThreadPool-Agent-common</module>
     </modules>
 
 </project>

@@ -2,7 +2,6 @@ package top.zhang.agent.advice.jdk;
 
 import net.bytebuddy.asm.Advice;
 import top.zhang.ThreadPoolMonitorData;
-import top.zhang.ThreadPoolWrapperFactory;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -17,6 +16,7 @@ public class ThreadPoolExecutorRejectAdvice {
         try{
             //以下代码不能抽取，一旦抽取，必须用bootstrap加载器加载
             ThreadPoolExecutor executor = (ThreadPoolExecutor)obj;
+            ThreadPoolMonitorData.reject(executor);
         }catch (Exception e){
             e.printStackTrace();
         }

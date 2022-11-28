@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="demo" lay-filter="test"></table>
+
+<script src="layui-main/src/layui.js"></script>
+<script th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#demo'
+            ,height: 400
+            ,url: '../getAllThreadPoolAgent'
+            ,page: true
+            ,cols: [[
+                {field: 'ip', title: 'IP地址', width:120}
+                ,{field: 'applicationName', title: '服务名', width:200}
+                ,{field: 'count', title: '线程池数量', width:200}
+                ,{field: 'ActiveCount', title: '活跃线程池数量', width:200}
+                ,{field: 'isActive', title: '活跃状态', width:200}
+                ,{title:"操作",toolbar:'#toolbar1'}
+            ]]
+        });
+
+    });
+</script>
+<script type="text/html" id="toolbar1">
+    <a class="layui-btn layui-btn-xs" lay-event="update">查询</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">中断监听</a>
+</script>
+</body>
+</html>

@@ -3,7 +3,6 @@ package top.zhang.agent.advice.netty;
 import io.netty.util.concurrent.EventExecutorGroup;
 import net.bytebuddy.asm.Advice;
 import top.zhang.ThreadPoolMonitorData;
-import top.zhang.ThreadPoolWrapperFactory;
 
 /**
  * @author 98549

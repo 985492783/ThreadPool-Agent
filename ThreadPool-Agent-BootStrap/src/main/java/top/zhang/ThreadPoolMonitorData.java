@@ -1,11 +1,9 @@
 package top.zhang;
 
-
-import top.zhang.wrapper.ThreadPoolWrapper;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author 98549
@@ -14,7 +12,7 @@ import java.util.concurrent.Executor;
 public class ThreadPoolMonitorData {
 
     private static Map<Class<?> , Map<Integer, Executor>> map = new ConcurrentHashMap<>();
-
+    private static Map<Integer, AtomicInteger> rejectMap = new ConcurrentHashMap<>();
     public static boolean add(Executor obj) {
         Class<? extends Executor> key = obj.getClass();
         Map<Integer, Executor> threadPoolExecutorMap = map.get(key);
@@ -23,12 +21,23 @@ public class ThreadPoolMonitorData {
             map.put(key,threadPoolExecutorMap);
         }
         if(!threadPoolExecutorMap.containsKey(obj.hashCode())){
-            threadPoolExecutorMap.put(obj.hashCode(),obj);
+            register(threadPoolExecutorMap,obj);
             return true;
         }
         return false;
     }
+    private static void register(Map<Integer,Executor> map,Executor obj){
+        map.put(obj.hashCode(),obj);
+        rejectMap.put(obj.hashCode(),new AtomicInteger(0));
+    }
 
+    public static void reject(Executor obj){
+        AtomicInteger rejectCount = rejectMap.get(obj.hashCode());
+        rejectCount.incrementAndGet();
+    }
+    public static AtomicInteger getReject(Executor executor){
+        return rejectMap.get(executor.hashCode());
+    }
     public static void remove(Executor obj) {
         Class<? extends Executor> key = obj.getClass();
         Map<Integer, Executor> threadPoolExecutorMap = map.get(key);

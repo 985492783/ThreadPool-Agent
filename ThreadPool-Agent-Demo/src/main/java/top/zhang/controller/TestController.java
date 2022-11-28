@@ -1,10 +1,14 @@
 package top.zhang.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import io.netty.channel.nio.NioEventLoopGroup;
+import cn.hutool.json.JSONUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.zhang.ThreadPoolMonitorData;
+import top.zhang.agent.wrapper.ThreadPoolWrapper;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -14,13 +18,4 @@ import top.zhang.ThreadPoolMonitorData;
 @RestController
 public class TestController {
 
-    @GetMapping("/")
-    public String test(){
-        return JSONObject.toJSONString(ThreadPoolMonitorData.alls());
-    }
-    @GetMapping("/test")
-    public String HH(){
-        NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
-        return "success";
-    }
 }

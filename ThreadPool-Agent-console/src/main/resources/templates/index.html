@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>线程池监控系统</title>
+    <link rel="stylesheet" href="layui-main/src/css/layui.css"/>
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">线程池监控系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="">控制台<span class="layui-badge">9</span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">个人中心<span class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全管理</a></dd>
+                    <dd><a href="javascript:;">退了</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">模块管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" name="t1" id="1" title="科室管理" content="homePage.html">项目管理</a></dd>
+                        <dd><a href="javascript:;" >文章列表</a></dd>
+                        <dd><a href="javascript:;" >类别管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body show-frame">
+        <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="empTab">
+            <ul class="layui-tab-title">
+                <li class="layui-this "><i class="layui-icon">&#xe68e;</i></li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show"><h1 style="color: #5FB878">欢迎线程池监控系统</h1></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<script src="layui-main/src/layui.js"></script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+        var $ = layui.$;
+        $("[name=t1]").click(function () {
+            var id = $(this).attr("id");
+            var content = $(this).attr("content");
+            if($("li[lay-id="+id+"]").length==0){
+                element.tabAdd("empTab",{
+                    title:$(this).attr("title"),
+                    content:"<iframe src='"+content+"' class='frame' frameborder='0'></iframe>",
+                    id:id
+                })
+            }
+            element.tabChange('empTab',id)
+        })
+    });
+</script>
+</body>
+
+</html>
+<style>
+    .layui-tab-content {
+        padding: 0;/*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+    }
+    .show-frame {
+        top: 50px!important;
+        /*默认.layui-layout-admin .layui-body {
+            top: 60px;
+            bottom: 44px;
+        }*/
+        overflow: hidden;/*消除浏览器最右边的滚动条*/
+    }
+    .frame {
+        position: absolute;
+        padding: 10px;/*与layui-footer隔开一段距离*/
+        width: 100%;
+        height: 100%;
+    }
+</style>
