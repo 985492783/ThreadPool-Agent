@@ -28,6 +28,8 @@ public class GetAllHandler implements HttpHandler {
             return;
         }
         byte[] result = JSONObject.toJSONString(ResultMap.ok(ThreadPoolWrapper.getMap())).getBytes(StandardCharsets.UTF_8);
+        httpExchange.getResponseHeaders().add("Content-type","application/json;charset=UTF-8");
+        httpExchange.getResponseHeaders().add("Connection","keep-alive");
         httpExchange.sendResponseHeaders(200,result.length);
         httpExchange.getResponseBody().write(result);
         httpExchange.close();

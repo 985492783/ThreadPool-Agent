@@ -29,7 +29,7 @@ public class RegistryCache {
                     }
                 });
             }
-        },1000,1000);
+        },1000,2500);
     }
     public static boolean register(String ip,int port,String token){
         Registry registry = new Registry(ip, port, token);
