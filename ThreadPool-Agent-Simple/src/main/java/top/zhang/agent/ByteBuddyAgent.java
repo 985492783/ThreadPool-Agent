@@ -1,6 +1,5 @@
 package top.zhang.agent;
 
-import io.netty.channel.nio.NioEventLoopGroup;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
@@ -8,7 +7,6 @@ import top.zhang.agent.advice.jdk.ThreadPoolExecutorConstructorAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorDestroyAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorExecuteAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorRejectAdvice;
-import top.zhang.agent.advice.netty.NioEventLoopGroupConstructorAdvice;
 import top.zhang.agent.server.MyHttpServer;
 
 import java.lang.instrument.Instrumentation;
@@ -34,7 +32,6 @@ public class ByteBuddyAgent {
         myHttpServer.print();
         try {
             threadPoolExecutor(instrumentation);
-            nioEventLoopGroup(instrumentation);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,22 +54,6 @@ public class ByteBuddyAgent {
         if(arg[0].equals("token") && token==null){
             token = arg[1];
         }
-    }
-
-    private static void nioEventLoopGroup(Instrumentation instrumentation) {
-        new AgentBuilder.Default()
-                .disableClassFormatChanges()
-                .ignore(ElementMatchers.noneOf(NioEventLoopGroup.class))
-                .with(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
-                .with(AgentBuilder.RedefinitionStrategy.REDEFINITION)
-                .with(AgentBuilder.TypeStrategy.Default.REDEFINE)
-                .with(AgentBuilder.InjectionStrategy.UsingUnsafe.INSTANCE)
-                .type(ElementMatchers.is(NioEventLoopGroup.class))
-                .transform((builder, typeDescription, classLoader, javaModule) ->
-                        builder.visit(Advice.to(NioEventLoopGroupConstructorAdvice.class)
-                                        .on(ElementMatchers.isConstructor()))
-                )
-                .installOn(instrumentation);
     }
 
 

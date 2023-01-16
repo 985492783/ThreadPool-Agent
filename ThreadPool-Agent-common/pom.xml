@@ -12,11 +12,6 @@
     <artifactId>ThreadPool-Agent-common</artifactId>
     <dependencies>
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-transport</artifactId>
-            <version>4.1.79.Final</version>
-        </dependency>
-        <dependency>
             <groupId>top.zhanghong</groupId>
             <artifactId>ThreadPool-Agent-BootStrap</artifactId>
             <version>1.0</version>
