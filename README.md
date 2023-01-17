@@ -11,4 +11,4 @@
 package或者下载拿到core包以及bootStrap包  
 在启动类加上此参数  
 > -javaagent:core.jar(core包路径)  
-> -Xbootclasspath/a:bootStrap.jar(bootStrap包路径)
+> -Xbootclasspath/a:bootStrap.jar(bootStrap包路径)  
