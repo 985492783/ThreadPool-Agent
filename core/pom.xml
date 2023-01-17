@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>ThreadPool-Agent</artifactId>
+        <artifactId>TPA</artifactId>
         <groupId>top.zhanghong</groupId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>ThreadPool-Agent-Simple</artifactId>
+    <artifactId>core</artifactId>
     <version>1.0</version>
     <properties>
         <main.class.path>top.zhang.agent.ByteBuddyAgent</main.class.path>
@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>top.zhanghong</groupId>
-            <artifactId>ThreadPool-Agent-common</artifactId>
+            <artifactId>common</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

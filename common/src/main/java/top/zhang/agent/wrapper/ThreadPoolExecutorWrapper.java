@@ -53,7 +53,12 @@ public class ThreadPoolExecutorWrapper extends ThreadPoolWrapper {
     public int getMaximumPoolSize() {
         return this.threadPoolExecutor.getMaximumPoolSize();
     }
-
+    
+    @Override
+    public void setMaximumPoolSize(int maximumPoolSize) {
+        this.threadPoolExecutor.setMaximumPoolSize(maximumPoolSize);
+    }
+    
     @Override
     public boolean isRunning() {
         return this.running;

@@ -14,11 +14,13 @@ import java.util.concurrent.Executor;
  */
 public abstract class ThreadPoolWrapper {
 
-    protected transient static Map<Integer,ThreadPoolWrapper> map = new ConcurrentHashMap<>();
+    protected static Map<Integer,ThreadPoolWrapper> map = new ConcurrentHashMap<>();
 
     public abstract Executor getExecutor();
 
     public abstract int getMaximumPoolSize();
+    
+    public abstract void setMaximumPoolSize(int maximumPoolSize);
 
     public abstract boolean isRunning();
 
