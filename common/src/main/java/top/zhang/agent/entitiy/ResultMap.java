@@ -1,8 +1,5 @@
 package top.zhang.agent.entitiy;
 
-import top.zhang.agent.wrapper.ThreadPoolWrapper;
-
-import java.util.Map;
 
 /**
  * @author 98549

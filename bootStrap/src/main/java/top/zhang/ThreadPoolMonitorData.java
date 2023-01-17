@@ -1,5 +1,8 @@
 package top.zhang;
 
+import top.zhang.agent.sms.event.MaximumPoolSizeChangeNotifyEvent;
+import top.zhang.agent.sms.listen.EventListenFactory;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
@@ -44,6 +47,11 @@ public class ThreadPoolMonitorData {
         if(threadPoolExecutorMap!=null){
             threadPoolExecutorMap.remove(obj.hashCode());
         }
+    }
+    public static void maximumPoolSizeChange(Integer from, Integer to) {
+        MaximumPoolSizeChangeNotifyEvent event = new MaximumPoolSizeChangeNotifyEvent(from,
+                to);
+        EventListenFactory.publishEvent(event);
     }
 
 
