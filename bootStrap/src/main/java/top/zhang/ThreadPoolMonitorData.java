@@ -48,9 +48,9 @@ public class ThreadPoolMonitorData {
             threadPoolExecutorMap.remove(obj.hashCode());
         }
     }
-    public static void maximumPoolSizeChange(Integer from, Integer to) {
+    public static void maximumPoolSizeChange(Integer from, Integer to, Executor executor) {
         MaximumPoolSizeChangeNotifyEvent event = new MaximumPoolSizeChangeNotifyEvent(from,
-                to);
+                to, executor);
         EventListenFactory.publishEvent(event);
     }
 

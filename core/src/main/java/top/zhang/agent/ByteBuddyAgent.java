@@ -8,8 +8,6 @@ import top.zhang.agent.advice.jdk.ThreadPoolExecutorDestroyAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorExecuteAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorRejectAdvice;
 import top.zhang.agent.advice.jdk.ThreadPoolExecutorSetMaximumPoolSize;
-import top.zhang.agent.server.MyHttpServer;
-import top.zhang.agent.sms.NotifyEventEnum;
 import top.zhang.agent.sms.listen.EventListen;
 import top.zhang.agent.sms.listen.EventListenFactory;
 
@@ -26,15 +24,11 @@ public class ByteBuddyAgent {
 
     private static int port=9854;
     private static String token=null;
-    private static MyHttpServer myHttpServer=new MyHttpServer();
     public static void agentmain(String args, Instrumentation inst) {
         premain(args, inst);
     }
 
     public static void premain(String args, Instrumentation instrumentation) {
-        init(args);
-        myHttpServer.bind(port);
-        myHttpServer.print();
         initSPI();
         try {
             threadPoolExecutor(instrumentation);
@@ -49,25 +43,7 @@ public class ByteBuddyAgent {
             EventListenFactory.addListen(eventListen);
         }
     }
-    
-    private static void init(String args) {
-        String[] split = args.split("&");
-        Arrays.stream(split).forEach((s)->{
-            String[] arg = s.split("=");
-            if(arg.length==2){
-                initConfig(arg);
-            }
-        });
-    }
 
-    private static void initConfig(String[] arg) {
-        if(arg[0].equals("port")&&port==9854){
-            port = Integer.parseInt(arg[1]);
-        }
-        if(arg[0].equals("token") && token==null){
-            token = arg[1];
-        }
-    }
 
 
     private static void threadPoolExecutor(Instrumentation instrumentation) {

@@ -22,7 +22,7 @@ public class ThreadPoolExecutorSetMaximumPoolSize {
                 //TODO 此处有一个trigger事件
                 return;
             }
-            ThreadPoolMonitorData.maximumPoolSizeChange(threadPoolExecutor.getMaximumPoolSize(), maximumPoolSize);
+            ThreadPoolMonitorData.maximumPoolSizeChange(threadPoolExecutor.getMaximumPoolSize(), maximumPoolSize, threadPoolExecutor);
         }catch (Exception e){
             e.printStackTrace();
         }

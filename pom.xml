@@ -15,6 +15,7 @@
         <module>bootStrap</module>
         <module>console</module>
         <module>common</module>
+        <module>sms</module>
     </modules>
 
 </project>

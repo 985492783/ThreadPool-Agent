@@ -6,21 +6,21 @@ package top.zhang.agent.entitiy;
  * @date 2022/10/19 16:30
  */
 
-public class ResultMap {
+public class ResultMap<T> {
     private int code;
     private String msg;
-    private Object data;
-    public ResultMap(int code,String msg,Object data){
+    private T data;
+    public ResultMap(int code,String msg,T data){
         this.code = code;
         this.msg = msg;
         this.data = data;
     }
-    public static ResultMap ok(Object map) {
-        return new ResultMap(200,"成功",map);
+    public static <T> ResultMap<T> ok(T map) {
+        return new ResultMap<>(200,"成功",map);
     }
 
-    public static ResultMap fail(int code,String msg) {
-        return new ResultMap(code,msg,null);
+    public static  <T> ResultMap<T> fail(int code,String msg) {
+        return new ResultMap<>(code,msg,null);
     }
 
     public int getCode() {
@@ -43,7 +43,7 @@ public class ResultMap {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

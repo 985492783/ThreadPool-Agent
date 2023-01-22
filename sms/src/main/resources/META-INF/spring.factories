@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = top.zhang.agent.sms.config.MailAutoConfiguration,\
+  top.zhang.agent.sms.config.GlobalConfig
